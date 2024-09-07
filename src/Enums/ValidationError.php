@@ -13,5 +13,4 @@ enum ValidationError: string
 
     // email rules
     case INVALID_EMAIL_FORMAT = 'Invalid email format.';
-
 }
