@@ -28,7 +28,7 @@ final class UserValidator
         return false;
     }
 
-    public function validatePassword(string $password, array $rules): bool
+    public function validatePassword(string $password): bool
     {
         foreach ($this->rules as $rule) {
             if (!$rule instanceof RuleInterface) {
