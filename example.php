@@ -30,8 +30,6 @@ $rules = [
 
 $validator = new UserValidator($rules);
 
-$email = "johndoe@example.com";
-$password = "StrongP@ssword1!";
 $testCaseNumber = 1;
 
 foreach ($testCases as $testCase) {
@@ -53,8 +51,8 @@ foreach ($testCases as $testCase) {
         echo "password is valid.\n";
     } else {
         echo "password is invalid due to the following reasons:\n";
-        foreach (explode("\n", $validator->getLastError()->value) as $error) {
-            echo "- $error\n";
+        foreach ($validator->getPasswordErrors() as $error) {
+            echo "- $error->value\n";
         }
     }
     echo "\n";

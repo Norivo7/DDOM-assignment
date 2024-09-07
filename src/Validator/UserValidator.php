@@ -9,6 +9,7 @@ use App\Validator\Rules\RuleInterface;
 
 final class UserValidator
 {
+    private array $passwordErrors = [];
     private ?ValidationError $lastError = null;
 
     public function __construct(
@@ -30,6 +31,8 @@ final class UserValidator
 
     public function validatePassword(string $password): bool
     {
+        $this->passwordErrors = [];
+
         foreach ($this->rules as $rule) {
             if (!$rule instanceof RuleInterface) {
                 throw new \InvalidArgumentException('Each rule must implement RuleInterface');
@@ -37,13 +40,16 @@ final class UserValidator
 
             $result = $rule->validate($password);
             if ($result !== true) {
-                $this->lastError = $result;
-                return false;
+                $this->passwordErrors[] = $result;
             }
         }
 
-        $this->lastError = null;
-        return true;
+        return count($this->passwordErrors) === 0;
+    }
+
+    public function getPasswordErrors(): array
+    {
+        return $this->passwordErrors;
     }
 
     public function getLastError(): ?ValidationError
