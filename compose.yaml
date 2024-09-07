@@ -1,0 +1,13 @@
+services:
+  ddom-assignment:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ddom-assignment
+    volumes:
+      - ./:/app
+    networks:
+      - app-network
+
+networks:
+  app-network:
