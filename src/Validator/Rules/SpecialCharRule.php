@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Validator\Rules;
 
 use App\Enums\ValidationError;
 
-class SpecialCharRule implements RuleInterface
+final class SpecialCharRule implements RuleInterface
 {
     public function validate(string $input): bool | ValidationError
     {
