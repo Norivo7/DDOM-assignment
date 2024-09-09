@@ -6,15 +6,20 @@ namespace App\Validator;
 
 use App\Enums\ValidationError;
 use App\Validator\Rules\RuleInterface;
+use InvalidArgumentException;
 
-final class UserValidator
+final class Validator
 {
     private array $passwordErrors = [];
     private ?ValidationError $lastError = null;
 
+    /**
+     * @param RuleInterface[] $rules
+     */
     public function __construct(
         private readonly array $rules
-    ) {}
+    ) {
+    }
 
     public function validateEmail(string $email): bool
     {
@@ -22,10 +27,12 @@ final class UserValidator
 
         if (preg_match($regex, $email)) {
             $this->lastError = null;
+
             return true;
         }
 
         $this->lastError = ValidationError::INVALID_EMAIL_FORMAT;
+
         return false;
     }
 
@@ -35,7 +42,7 @@ final class UserValidator
 
         foreach ($this->rules as $rule) {
             if (!$rule instanceof RuleInterface) {
-                throw new \InvalidArgumentException('Each rule must implement RuleInterface');
+                throw new InvalidArgumentException('Invalid rule.');
             }
 
             $result = $rule->validate($password);

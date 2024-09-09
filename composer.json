@@ -4,5 +4,8 @@
       "App\\": "src/"
     }
   },
-  "require": {}
+  "require-dev": {
+    "inspector-apm/inspector-php": "*",
+    "friendsofphp/php-cs-fixer": "^3.64"
+  }
 }
