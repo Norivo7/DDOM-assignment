@@ -5,7 +5,7 @@ use App\Validator\Rules\LowercaseRule;
 use App\Validator\Rules\PasswordLengthRule;
 use App\Validator\Rules\SpecialCharRule;
 use App\Validator\Rules\UppercaseRule;
-use App\Validator\UserValidator;
+use App\Validator\Validator;
 
 require_once __DIR__ . '/vendor/autoload.php';
 
@@ -28,7 +28,7 @@ $rules = [
     new SpecialCharRule(),
 ];
 
-$validator = new UserValidator($rules);
+$validator = new Validator($rules);
 
 $testCaseNumber = 1;
 
